@@ -36,7 +36,7 @@ partial class TelaPrincipal
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 364);
             this.Name = "TelaPrincipal";
-            this.Text = "Iniciar Ambiente";
+            this.Text = "Inicializador de Ambiente";
             this.ResumeLayout(false);
 
     }
