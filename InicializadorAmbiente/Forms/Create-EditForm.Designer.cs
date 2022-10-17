@@ -28,27 +28,30 @@ partial class Create_EditForm
     /// </summary>
     private void InitializeComponent()
     {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbNomeAmbiente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numIntervalo = new System.Windows.Forms.NumericUpDown();
             this.flowAplicacoes = new System.Windows.Forms.FlowLayoutPanel();
-            this.gbSite = new System.Windows.Forms.GroupBox();
+            this.template_gbSite = new System.Windows.Forms.GroupBox();
             this.btn_Site_Del = new System.Windows.Forms.Button();
-            this.tbSite = new System.Windows.Forms.TextBox();
+            this.template_tbURL = new System.Windows.Forms.TextBox();
+            this.siteDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lblURL = new System.Windows.Forms.Label();
-            this.gbPrograma = new System.Windows.Forms.GroupBox();
+            this.template_gbPrograma = new System.Windows.Forms.GroupBox();
             this.btn_Programa_Buscar = new System.Windows.Forms.Button();
-            this.tb_Programa_Caminho = new System.Windows.Forms.TextBox();
+            this.template_tbPrograma_Caminho = new System.Windows.Forms.TextBox();
             this.btn_Programa_Del = new System.Windows.Forms.Button();
             this.lblCaminho = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnSalvar = new System.Windows.Forms.Button();
             this.adcSite = new System.Windows.Forms.Button();
             this.adcPrograma = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIntervalo)).BeginInit();
             this.flowAplicacoes.SuspendLayout();
-            this.gbSite.SuspendLayout();
-            this.gbPrograma.SuspendLayout();
+            this.template_gbSite.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.siteDataBindingSource)).BeginInit();
+            this.template_gbPrograma.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -61,12 +64,12 @@ partial class Create_EditForm
             this.label1.TabIndex = 0;
             this.label1.Text = "Nome:";
             // 
-            // textBox1
+            // tbNomeAmbiente
             // 
-            this.textBox1.Location = new System.Drawing.Point(97, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(255, 23);
-            this.textBox1.TabIndex = 1;
+            this.tbNomeAmbiente.Location = new System.Drawing.Point(97, 12);
+            this.tbNomeAmbiente.Name = "tbNomeAmbiente";
+            this.tbNomeAmbiente.Size = new System.Drawing.Size(255, 23);
+            this.tbNomeAmbiente.TabIndex = 1;
             // 
             // label2
             // 
@@ -78,36 +81,36 @@ partial class Create_EditForm
             this.label2.TabIndex = 2;
             this.label2.Text = "Intervalo de execução:";
             // 
-            // numericUpDown1
+            // numIntervalo
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(286, 65);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(66, 23);
-            this.numericUpDown1.TabIndex = 2;
+            this.numIntervalo.Location = new System.Drawing.Point(286, 65);
+            this.numIntervalo.Name = "numIntervalo";
+            this.numIntervalo.Size = new System.Drawing.Size(66, 23);
+            this.numIntervalo.TabIndex = 2;
             // 
             // flowAplicacoes
             // 
             this.flowAplicacoes.AutoScroll = true;
-            this.flowAplicacoes.Controls.Add(this.gbSite);
-            this.flowAplicacoes.Controls.Add(this.gbPrograma);
+            this.flowAplicacoes.Controls.Add(this.template_gbSite);
+            this.flowAplicacoes.Controls.Add(this.template_gbPrograma);
             this.flowAplicacoes.Location = new System.Drawing.Point(12, 140);
             this.flowAplicacoes.Name = "flowAplicacoes";
             this.flowAplicacoes.Size = new System.Drawing.Size(408, 283);
             this.flowAplicacoes.TabIndex = 4;
             // 
-            // gbSite
+            // template_gbSite
             // 
-            this.gbSite.Controls.Add(this.btn_Site_Del);
-            this.gbSite.Controls.Add(this.tbSite);
-            this.gbSite.Controls.Add(this.lblURL);
-            this.gbSite.Location = new System.Drawing.Point(3, 3);
-            this.gbSite.Name = "gbSite";
-            this.gbSite.Size = new System.Drawing.Size(373, 72);
-            this.gbSite.TabIndex = 0;
-            this.gbSite.TabStop = false;
-            this.gbSite.Tag = "entradaSite";
-            this.gbSite.Text = "Site";
-            this.gbSite.Visible = false;
+            this.template_gbSite.Controls.Add(this.btn_Site_Del);
+            this.template_gbSite.Controls.Add(this.template_tbURL);
+            this.template_gbSite.Controls.Add(this.lblURL);
+            this.template_gbSite.Location = new System.Drawing.Point(3, 3);
+            this.template_gbSite.Name = "template_gbSite";
+            this.template_gbSite.Size = new System.Drawing.Size(373, 72);
+            this.template_gbSite.TabIndex = 0;
+            this.template_gbSite.TabStop = false;
+            this.template_gbSite.Tag = "";
+            this.template_gbSite.Text = "Site";
+            this.template_gbSite.Visible = false;
             // 
             // btn_Site_Del
             // 
@@ -118,13 +121,14 @@ partial class Create_EditForm
             this.btn_Site_Del.Text = "Deletar";
             this.btn_Site_Del.UseVisualStyleBackColor = true;
             // 
-            // tbSite
+            // template_tbURL
             // 
-            this.tbSite.Location = new System.Drawing.Point(58, 17);
-            this.tbSite.Name = "tbSite";
-            this.tbSite.Size = new System.Drawing.Size(309, 23);
-            this.tbSite.TabIndex = 5;
-            this.tbSite.Tag = "0";
+            this.template_tbURL.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.siteDataBindingSource, "URL", true));
+            this.template_tbURL.Location = new System.Drawing.Point(58, 17);
+            this.template_tbURL.Name = "template_tbURL";
+            this.template_tbURL.Size = new System.Drawing.Size(309, 23);
+            this.template_tbURL.TabIndex = 5;
+            this.template_tbURL.Tag = "CampoURL";
             // 
             // lblURL
             // 
@@ -136,20 +140,20 @@ partial class Create_EditForm
             this.lblURL.TabIndex = 0;
             this.lblURL.Text = "URL: ";
             // 
-            // gbPrograma
+            // template_gbPrograma
             // 
-            this.gbPrograma.Controls.Add(this.btn_Programa_Buscar);
-            this.gbPrograma.Controls.Add(this.tb_Programa_Caminho);
-            this.gbPrograma.Controls.Add(this.btn_Programa_Del);
-            this.gbPrograma.Controls.Add(this.lblCaminho);
-            this.gbPrograma.Location = new System.Drawing.Point(3, 81);
-            this.gbPrograma.Name = "gbPrograma";
-            this.gbPrograma.Size = new System.Drawing.Size(373, 80);
-            this.gbPrograma.TabIndex = 0;
-            this.gbPrograma.TabStop = false;
-            this.gbPrograma.Tag = "entradaPrograma";
-            this.gbPrograma.Text = "Programa";
-            this.gbPrograma.Visible = false;
+            this.template_gbPrograma.Controls.Add(this.btn_Programa_Buscar);
+            this.template_gbPrograma.Controls.Add(this.template_tbPrograma_Caminho);
+            this.template_gbPrograma.Controls.Add(this.btn_Programa_Del);
+            this.template_gbPrograma.Controls.Add(this.lblCaminho);
+            this.template_gbPrograma.Location = new System.Drawing.Point(3, 81);
+            this.template_gbPrograma.Name = "template_gbPrograma";
+            this.template_gbPrograma.Size = new System.Drawing.Size(373, 80);
+            this.template_gbPrograma.TabIndex = 0;
+            this.template_gbPrograma.TabStop = false;
+            this.template_gbPrograma.Tag = "";
+            this.template_gbPrograma.Text = "Programa";
+            this.template_gbPrograma.Visible = false;
             // 
             // btn_Programa_Buscar
             // 
@@ -160,14 +164,14 @@ partial class Create_EditForm
             this.btn_Programa_Buscar.Text = "Buscar";
             this.btn_Programa_Buscar.UseVisualStyleBackColor = true;
             // 
-            // tb_Programa_Caminho
+            // template_tbPrograma_Caminho
             // 
-            this.tb_Programa_Caminho.Enabled = false;
-            this.tb_Programa_Caminho.Location = new System.Drawing.Point(82, 19);
-            this.tb_Programa_Caminho.Name = "tb_Programa_Caminho";
-            this.tb_Programa_Caminho.Size = new System.Drawing.Size(207, 23);
-            this.tb_Programa_Caminho.TabIndex = 4;
-            this.tb_Programa_Caminho.Tag = "";
+            this.template_tbPrograma_Caminho.Enabled = false;
+            this.template_tbPrograma_Caminho.Location = new System.Drawing.Point(82, 19);
+            this.template_tbPrograma_Caminho.Name = "template_tbPrograma_Caminho";
+            this.template_tbPrograma_Caminho.Size = new System.Drawing.Size(207, 23);
+            this.template_tbPrograma_Caminho.TabIndex = 4;
+            this.template_tbPrograma_Caminho.Tag = "";
             // 
             // btn_Programa_Del
             // 
@@ -189,14 +193,15 @@ partial class Create_EditForm
             this.lblCaminho.Text = "Caminho: ";
             this.lblCaminho.Click += new System.EventHandler(this.label4_Click);
             // 
-            // button3
+            // btnSalvar
             // 
-            this.button3.Location = new System.Drawing.Point(12, 429);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(89, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Salvar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSalvar.Location = new System.Drawing.Point(12, 429);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(89, 23);
+            this.btnSalvar.TabIndex = 9;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // adcSite
             // 
@@ -225,20 +230,21 @@ partial class Create_EditForm
             this.ClientSize = new System.Drawing.Size(425, 461);
             this.Controls.Add(this.adcPrograma);
             this.Controls.Add(this.adcSite);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.flowAplicacoes);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numIntervalo);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbNomeAmbiente);
             this.Controls.Add(this.label1);
             this.Name = "Create_EditForm";
             this.Text = "Create_EditForm";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIntervalo)).EndInit();
             this.flowAplicacoes.ResumeLayout(false);
-            this.gbSite.ResumeLayout(false);
-            this.gbSite.PerformLayout();
-            this.gbPrograma.ResumeLayout(false);
-            this.gbPrograma.PerformLayout();
+            this.template_gbSite.ResumeLayout(false);
+            this.template_gbSite.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.siteDataBindingSource)).EndInit();
+            this.template_gbPrograma.ResumeLayout(false);
+            this.template_gbPrograma.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,20 +253,21 @@ partial class Create_EditForm
     #endregion
 
     private Label label1;
-    private TextBox textBox1;
+    private TextBox tbNomeAmbiente;
     private Label label2;
-    private NumericUpDown numericUpDown1;
+    private NumericUpDown numIntervalo;
     private FlowLayoutPanel flowAplicacoes;
-    private GroupBox gbSite;
+    private GroupBox template_gbSite;
     private Label lblURL;
-    private TextBox tbSite;
+    private TextBox template_tbURL;
     private Button btn_Site_Del;
-    private GroupBox gbPrograma;
+    private GroupBox template_gbPrograma;
     private Label lblCaminho;
     private Button btn_Programa_Del;
     private Button btn_Programa_Buscar;
-    private TextBox tb_Programa_Caminho;
-    private Button button3;
+    private TextBox template_tbPrograma_Caminho;
+    private Button btnSalvar;
     private Button adcSite;
     private Button adcPrograma;
+    private BindingSource siteDataBindingSource;
 }
