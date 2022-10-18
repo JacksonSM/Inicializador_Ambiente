@@ -30,7 +30,10 @@ partial class HomeForm
     {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btn_CriarAmbiente = new System.Windows.Forms.ToolStripMenuItem();
+            this.flpAmbientes = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnTemplateInicializador = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            this.flpAmbientes.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -40,7 +43,7 @@ partial class HomeForm
             this.btn_CriarAmbiente});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(350, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -51,17 +54,40 @@ partial class HomeForm
             this.btn_CriarAmbiente.Text = "Criar Ambiente";
             this.btn_CriarAmbiente.Click += new System.EventHandler(this.btn_CriarAmbiente_Click);
             // 
+            // flpAmbientes
+            // 
+            this.flpAmbientes.Controls.Add(this.btnTemplateInicializador);
+            this.flpAmbientes.Location = new System.Drawing.Point(12, 27);
+            this.flpAmbientes.Name = "flpAmbientes";
+            this.flpAmbientes.Size = new System.Drawing.Size(332, 411);
+            this.flpAmbientes.TabIndex = 1;
+            // 
+            // btnTemplateInicializador
+            // 
+            this.btnTemplateInicializador.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnTemplateInicializador.Location = new System.Drawing.Point(10, 10);
+            this.btnTemplateInicializador.Margin = new System.Windows.Forms.Padding(10);
+            this.btnTemplateInicializador.Name = "btnTemplateInicializador";
+            this.btnTemplateInicializador.Size = new System.Drawing.Size(140, 74);
+            this.btnTemplateInicializador.TabIndex = 0;
+            this.btnTemplateInicializador.Text = "Exemplo";
+            this.btnTemplateInicializador.UseVisualStyleBackColor = true;
+            this.btnTemplateInicializador.Visible = false;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(350, 450);
+            this.Controls.Add(this.flpAmbientes);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "HomeForm";
             this.Text = "HomeForm";
+            this.Load += new System.EventHandler(this.HomeForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.flpAmbientes.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -71,4 +97,6 @@ partial class HomeForm
 
     private MenuStrip menuStrip1;
     private ToolStripMenuItem btn_CriarAmbiente;
+    private FlowLayoutPanel flpAmbientes;
+    private Button btnTemplateInicializador;
 }

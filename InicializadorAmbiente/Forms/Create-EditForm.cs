@@ -44,6 +44,7 @@ public partial class Create_EditForm : Form
 
         //TODO - Colocar cada bloco em classes tipadas que tem a funcao de clona os componentes.
     }
+
     private void adcPrograma_Click(object sender, EventArgs e)
     {
         var grupBox = template_gbPrograma.Clone();
@@ -70,11 +71,13 @@ public partial class Create_EditForm : Form
         btnBuscar.Click += BuscarAtalho;
         btnBuscar.Parent = grupBox;
     }
+
     private void DeletarAplicacao(object sender, EventArgs e)
     {
         var btn = sender as Button;
         btn.Parent.Dispose();
     }
+
     private void BuscarAtalho(object sender, EventArgs e)
     {
         var btn = sender as Button;
@@ -103,8 +106,9 @@ public partial class Create_EditForm : Form
         ambiente.Aplicacao.AddRange(dadosPrograma);
 
         await AmbienteDao.SalvarAmiente(ambiente);
-        this.Dispose();
+        this.Close();
     }
+
     private List<Aplicacao> CapturarSites()
     {
         var sites = flowAplicacoes.Controls
@@ -119,6 +123,7 @@ public partial class Create_EditForm : Form
         }
         return aplicacoes;
     }
+
     private List<Aplicacao> CapturarProgramas()
     {
         var sites = flowAplicacoes.Controls

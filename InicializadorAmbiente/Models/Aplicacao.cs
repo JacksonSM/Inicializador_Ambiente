@@ -7,6 +7,8 @@ public class Aplicacao
     public string Tipo { get; private set; }
     public string Caminho { get; private set; }
 
+    public Aplicacao(){}
+
     private Aplicacao(string tipo, string caminho)
     {
         Tipo = tipo;
