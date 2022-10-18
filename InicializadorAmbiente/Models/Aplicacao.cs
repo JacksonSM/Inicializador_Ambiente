@@ -4,8 +4,8 @@ public class Aplicacao
     private const string SITE = "SITE";
     private const string PROGRAMA = "PROGRAMA";
 
-    public string Tipo { get; private set; }
-    public string Caminho { get; private set; }
+    public string Tipo { get; set; }
+    public string Caminho { get;  set; }
 
     public Aplicacao(){}
 
@@ -23,5 +23,4 @@ public class Aplicacao
     {
         return new Aplicacao(PROGRAMA, caminho);
     }
-    
 }

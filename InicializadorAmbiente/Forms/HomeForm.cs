@@ -39,7 +39,8 @@ public partial class HomeForm : Form
     private void IniciarAmbiente(object sender, EventArgs e)
     {
         var ambiente = (sender as Button).Tag as Ambiente;
-        
+        var inicializador = new Inicializador();
+        inicializador.Iniciar(ambiente);
     }
 
     private void HomeForm_Load(object sender, EventArgs e)

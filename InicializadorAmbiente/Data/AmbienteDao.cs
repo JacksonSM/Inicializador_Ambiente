@@ -24,7 +24,9 @@ public class AmbienteDao
 
         var ambientesJson = File.ReadAllText(arquivo);
 
-        return JsonConvert.DeserializeObject<List<Ambiente>>(ambientesJson);
+        var teste = JsonConvert.DeserializeObject<List<Ambiente>>(ambientesJson);
+
+        return teste;
     }
 
     private static async Task SalvarArquivo(List<Ambiente> ambientes)
