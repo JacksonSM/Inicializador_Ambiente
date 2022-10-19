@@ -29,7 +29,14 @@ public class AmbienteDao
 
         await SalvarArquivo(ambientes);
     }
+    public static async Task DeletarAmbiente(int ambienteId)
+    {
+        var ambientes = ObterAmbientes();
 
+        ambientes.RemoveAll(x => x.Id == ambienteId);
+
+        await SalvarArquivo(ambientes);
+    }
     public static List<Ambiente> ObterAmbientes()
     {
         string folder = Caminho;

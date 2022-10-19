@@ -296,9 +296,15 @@ public partial class Create_EditForm : Form
 
     #endregion
 
-    private void btnDeletarAmbiente_Click(object sender, EventArgs e)
+    private async void btnDeletarAmbiente_Click(object sender, EventArgs e)
     {
-
+        DialogResult dialogResult = MessageBox
+            .Show("Desejar mesmo deletar o ambiente ?", "!!!!!!!!!", MessageBoxButtons.YesNo);
+        if (dialogResult == DialogResult.Yes)
+        {
+            await AmbienteDao.DeletarAmbiente(IdAmbienteAtualizar);
+            this.Close();
+        }
     }
 }
 
