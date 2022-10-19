@@ -48,6 +48,7 @@ partial class Create_EditForm
             this.adcSite = new System.Windows.Forms.Button();
             this.adcPrograma = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnDeletarAmbiente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numIntervalo)).BeginInit();
             this.flowAplicacoes.SuspendLayout();
             this.template_gbSite.SuspendLayout();
@@ -198,7 +199,6 @@ partial class Create_EditForm
             this.lblCaminho.Size = new System.Drawing.Size(80, 21);
             this.lblCaminho.TabIndex = 0;
             this.lblCaminho.Text = "Caminho: ";
-            this.lblCaminho.Click += new System.EventHandler(this.label4_Click);
             // 
             // btnSalvar
             // 
@@ -208,7 +208,6 @@ partial class Create_EditForm
             this.btnSalvar.TabIndex = 9;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // adcSite
             // 
@@ -234,11 +233,24 @@ partial class Create_EditForm
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnDeletarAmbiente
+            // 
+            this.btnDeletarAmbiente.BackColor = System.Drawing.Color.Red;
+            this.btnDeletarAmbiente.Location = new System.Drawing.Point(353, 429);
+            this.btnDeletarAmbiente.Name = "btnDeletarAmbiente";
+            this.btnDeletarAmbiente.Size = new System.Drawing.Size(75, 23);
+            this.btnDeletarAmbiente.TabIndex = 10;
+            this.btnDeletarAmbiente.Text = "Deletar";
+            this.btnDeletarAmbiente.UseVisualStyleBackColor = false;
+            this.btnDeletarAmbiente.Visible = false;
+            this.btnDeletarAmbiente.Click += new System.EventHandler(this.btnDeletarAmbiente_Click);
+            // 
             // Create_EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 461);
+            this.Controls.Add(this.btnDeletarAmbiente);
             this.Controls.Add(this.adcPrograma);
             this.Controls.Add(this.adcSite);
             this.Controls.Add(this.btnSalvar);
@@ -283,4 +295,5 @@ partial class Create_EditForm
     private Button adcPrograma;
     private BindingSource siteDataBindingSource;
     private ErrorProvider errorProvider1;
+    private Button btnDeletarAmbiente;
 }

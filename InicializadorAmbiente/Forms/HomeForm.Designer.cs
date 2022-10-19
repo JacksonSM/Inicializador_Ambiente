@@ -30,6 +30,7 @@ partial class HomeForm
     {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btn_CriarAmbiente = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Editar = new System.Windows.Forms.ToolStripMenuItem();
             this.flpAmbientes = new System.Windows.Forms.FlowLayoutPanel();
             this.btnTemplateInicializador = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
@@ -40,7 +41,8 @@ partial class HomeForm
             // 
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btn_CriarAmbiente});
+            this.btn_CriarAmbiente,
+            this.btn_Editar});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(350, 24);
@@ -52,7 +54,13 @@ partial class HomeForm
             this.btn_CriarAmbiente.Name = "btn_CriarAmbiente";
             this.btn_CriarAmbiente.Size = new System.Drawing.Size(99, 20);
             this.btn_CriarAmbiente.Text = "Criar Ambiente";
-            this.btn_CriarAmbiente.Click += new System.EventHandler(this.btn_CriarAmbiente_Click);
+            this.btn_CriarAmbiente.Click += new System.EventHandler(this.CriarAmbiente);
+            // 
+            // btn_Editar
+            // 
+            this.btn_Editar.Name = "btn_Editar";
+            this.btn_Editar.Size = new System.Drawing.Size(49, 20);
+            this.btn_Editar.Text = "Editar";
             // 
             // flpAmbientes
             // 
@@ -99,4 +107,5 @@ partial class HomeForm
     private ToolStripMenuItem btn_CriarAmbiente;
     private FlowLayoutPanel flpAmbientes;
     private Button btnTemplateInicializador;
+    private ToolStripMenuItem btn_Editar;
 }

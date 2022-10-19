@@ -16,62 +16,30 @@ public partial class Create_EditForm : Form
         InitializeComponent();
     }
 
-    private void label4_Click(object sender, EventArgs e)
+    internal void FormCriarAmbiente()
     {
-
+        btnSalvar.Click += SalvarAmbiente;
     }
+
+    internal void FormAtualizarAmbiente(Ambiente ambiente)
+    {
+        btnSalvar.Click += AtualizarAmbiente;
+        IdAmbienteAtualizar = ambiente.Id;
+        btnDeletarAmbiente.Visible = true;
+        PopularTela(ambiente);
+    }
+
 
     private void adcSite_Click(object sender, EventArgs e)
     {
-        var grupBox = template_gbSite.Clone();
-        grupBox.Name = GB_SITE;
-        grupBox.Visible = true;
-        grupBox.Parent = flowAplicacoes;
-
-        var lbl = lblURL.Clone();
-        lbl.Visible = true;
-        lbl.Parent = grupBox;
-
-        var tb = template_tbURL.Clone();
-        tb.Name = TB_SITE_URL;
-        tb.Validating += tbURL_Validating;
-        tb.Validated += tbURL_Validated;
-        tb.Visible = true;
-        tb.Parent = grupBox;
-
-        var btn = btn_Site_Del.Clone();
-        btn.Visible = true;
-        btn.Click += DeletarAplicacao;
-        btn.Parent = grupBox;
+        ClonarGrupoSite(null);
 
         //TODO - Colocar cada bloco em classes tipadas que tem a funcao de clona os componentes.
     }
 
     private void adcPrograma_Click(object sender, EventArgs e)
     {
-        var grupBox = template_gbPrograma.Clone();
-        grupBox.Name = GB_PROGRAMA;
-        grupBox.Visible = true;
-        grupBox.Parent = flowAplicacoes;
-
-        var lbl = lblCaminho.Clone();
-        lbl.Visible = true;
-        lbl.Parent = grupBox;
-
-        var tb = template_tbPrograma_Caminho.Clone();
-        tb.Name = TB_PROGRAMA_CAMINHO;
-        tb.Visible = true;
-        tb.Parent = grupBox;
-
-        var btnDel = btn_Programa_Del.Clone();
-        btnDel.Visible = true;
-        btnDel.Click += DeletarAplicacao;
-        btnDel.Parent = grupBox;
-
-        var btnBuscar = btn_Programa_Buscar.Clone();
-        btnBuscar.Visible = true;
-        btnBuscar.Click += BuscarAtalho;
-        btnBuscar.Parent = grupBox;
+        ClonarGrupoPrograma(null);
     }
 
     private void DeletarAplicacao(object sender, EventArgs e)
@@ -95,29 +63,72 @@ public partial class Create_EditForm : Form
         }
     }
 
-    private async void btnSalvar_Click(object sender, EventArgs e)
+    private async void SalvarAmbiente(object sender, EventArgs e)
     {
-        if(ValidarDados(out string errorMessage))
+        if (ValidarDados(out string errorMessage))
         {
-            Ambiente ambiente = new Ambiente();
-            ambiente.Nome = tbNomeAmbiente.Text;
-            ambiente.IntervaloEmSegundos = numIntervalo.Value;
 
-            var dadosSites = CapturarSites();
-            var dadosPrograma = CapturarProgramas();
-
-            ambiente.Aplicacao.AddRange(dadosSites);
-            ambiente.Aplicacao.AddRange(dadosPrograma);
-
-            await AmbienteDao.SalvarAmiente(ambiente);
+            var ambiente = CapturarDadosAmbiente();
+            await AmbienteDao.SalvarNovoAmbiente(ambiente);
 
             this.Close();
         }
         else
         {
-            MessageBox.Show(errorMessage);  
+            MessageBox.Show(errorMessage);
         }
-        
+    }
+
+    private int IdAmbienteAtualizar;
+    private async void AtualizarAmbiente(object sender, EventArgs e)
+    {
+        if (ValidarDados(out string errorMessage))
+        {
+
+            var ambiente = CapturarDadosAmbiente();
+            ambiente.Id = IdAmbienteAtualizar;
+            await AmbienteDao.AtualizarAmbiente(ambiente);
+
+            this.Close();
+        }
+        else
+        {
+            MessageBox.Show(errorMessage);
+        }
+    }
+
+    private Ambiente CapturarDadosAmbiente()
+    {
+        Ambiente ambiente = new Ambiente();
+        ambiente.Nome = tbNomeAmbiente.Text;
+        ambiente.IntervaloEmSegundos = numIntervalo.Value;
+
+        var dadosSites = CapturarSites();
+        var dadosPrograma = CapturarProgramas();
+
+        ambiente.Aplicacoes.AddRange(dadosSites);
+        ambiente.Aplicacoes.AddRange(dadosPrograma);
+
+        return ambiente;
+    }
+
+
+    private void PopularTela(Ambiente ambiente)
+    {
+        tbNomeAmbiente.Text = ambiente.Nome;
+        numIntervalo.Value = ambiente.IntervaloEmSegundos;
+
+        foreach (var aplicacao in ambiente.Aplicacoes)
+        {
+            if(aplicacao.Tipo == "SITE")
+            {
+                ClonarGrupoSite(aplicacao);
+            }
+            else
+            {
+                ClonarGrupoPrograma(aplicacao);
+            }
+        }
     }
 
     private List<Aplicacao> CapturarSites()
@@ -151,6 +162,74 @@ public partial class Create_EditForm : Form
         return aplicacoes;
     }
 
+
+    #region Clonagem
+
+    private void ClonarGrupoSite(Aplicacao aplicacao)
+    {
+        var grupBox = template_gbSite.Clone();
+        grupBox.Name = GB_SITE;
+        grupBox.Visible = true;
+        grupBox.Parent = flowAplicacoes;
+
+        var lbl = lblURL.Clone();
+        lbl.Visible = true;
+        lbl.Parent = grupBox;
+
+        var tb = template_tbURL.Clone();
+        tb.Name = TB_SITE_URL;
+        tb.Validating += tbURL_Validating;
+        tb.Validated += tbURL_Validated;
+        tb.Visible = true;
+        tb.Parent = grupBox;
+
+        var btn = btn_Site_Del.Clone();
+        btn.Visible = true;
+        btn.Click += DeletarAplicacao;
+        btn.Parent = grupBox;
+
+        if (aplicacao != null)
+        {
+            tb.Text = aplicacao.Caminho;
+        }
+    }
+
+    private void ClonarGrupoPrograma(Aplicacao aplicacao)
+    {
+        var grupBox = template_gbPrograma.Clone();
+        grupBox.Name = GB_PROGRAMA;
+        grupBox.Visible = true;
+        grupBox.Parent = flowAplicacoes;
+
+        var lbl = lblCaminho.Clone();
+        lbl.Visible = true;
+        lbl.Parent = grupBox;
+
+        var tb = template_tbPrograma_Caminho.Clone();
+        tb.Name = TB_PROGRAMA_CAMINHO;
+        tb.Visible = true;
+        tb.Parent = grupBox;
+
+        var btnDel = btn_Programa_Del.Clone();
+        btnDel.Visible = true;
+        btnDel.Click += DeletarAplicacao;
+        btnDel.Parent = grupBox;
+
+        var btnBuscar = btn_Programa_Buscar.Clone();
+        btnBuscar.Visible = true;
+        btnBuscar.Click += BuscarAtalho;
+        btnBuscar.Parent = grupBox;
+
+        if (aplicacao != null)
+        {
+            tb.Text = aplicacao.Caminho;
+        }
+
+    }
+    #endregion
+
+
+    #region Validacao
     private void tbURL_Validating(object sender, System.ComponentModel.CancelEventArgs e)
     {
         var text = (sender as TextBox).Text;
@@ -181,7 +260,7 @@ public partial class Create_EditForm : Form
         }
 
         //Valida se existe aplicacao. Se for igual a 2 é por que nao tem aplicação.
-        if(flowAplicacoes.Controls.Count == 2)
+        if (flowAplicacoes.Controls.Count == 2)
         {
             errorMessage = "Deve ter pelo menos uma aplicação no ambiente.";
             return false;
@@ -214,4 +293,12 @@ public partial class Create_EditForm : Form
         errorMessage = "";
         return true;
     }
+
+    #endregion
+
+    private void btnDeletarAmbiente_Click(object sender, EventArgs e)
+    {
+
+    }
 }
+

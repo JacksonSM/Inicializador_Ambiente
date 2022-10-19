@@ -19,23 +19,28 @@ public partial class HomeForm : Form
         {
             CriarInicializador(abt);
         }
+        
     }
+
     private void CriarInicializador(Ambiente ambiente)
     {
         var inicializador = btnTemplateInicializador.Clone();
         inicializador.Text = ambiente.Nome;
         inicializador.Tag = ambiente;
+
         inicializador.Click += IniciarAmbiente;
         inicializador.Visible = true;
         inicializador.Parent = flpAmbientes;
     }
 
-    private void btn_CriarAmbiente_Click(object sender, EventArgs e)
+    private void CriarAmbiente(object sender, EventArgs e)
     {
-        var formCriarAmbiente = new Create_EditForm();
-        formCriarAmbiente.FormClosed += HomeForm_Load;
-        formCriarAmbiente.Show();
+        var form = new Create_EditForm();
+        form.FormCriarAmbiente();
+        form.FormClosed += HomeForm_Load;
+        form.Show();
     }
+
     private void IniciarAmbiente(object sender, EventArgs e)
     {
         var ambiente = (sender as Button).Tag as Ambiente;
@@ -46,5 +51,38 @@ public partial class HomeForm : Form
     private void HomeForm_Load(object sender, EventArgs e)
     {
         AtualizarInicializadores();
+        PopularMenuEditar();
+    }
+
+    private void PopularMenuEditar()
+    {
+        btn_Editar.DropDownItems.Clear();
+        var inicializadores = flpAmbientes.Controls.OfType<Button>().ToList();
+
+        List<Ambiente> ambientes = new List<Ambiente>();
+
+        foreach (var button in inicializadores)
+        {
+            ambientes.Add(button.Tag as Ambiente);
+        }
+
+        ambientes.ForEach((ambiente) =>
+        {
+            var menuItem = new ToolStripMenuItem();
+            menuItem.Text = ambiente.Nome;
+            menuItem.Click += AtualizarInicializador;
+            menuItem.Tag = ambiente;
+
+            btn_Editar.DropDownItems.Add(menuItem);
+        });
+    }
+
+    private void AtualizarInicializador(object sender, EventArgs e)
+    {
+        var form = new Create_EditForm();
+
+        form.FormAtualizarAmbiente((sender as ToolStripMenuItem).Tag as Ambiente);
+        form.FormClosed += HomeForm_Load;
+        form.Show();
     }
 }

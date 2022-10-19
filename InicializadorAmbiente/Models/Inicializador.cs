@@ -13,7 +13,7 @@ public class Inicializador
         site.Proximo = programa;
         programa.Proximo = appNaoIdentificado;
 
-        foreach (var aplicacao in ambiente.Aplicacao)
+        foreach (var aplicacao in ambiente.Aplicacoes)
         {
             site.Executar(aplicacao);
             Thread.Sleep(TimeSpan.FromSeconds((double)ambiente.IntervaloEmSegundos));
