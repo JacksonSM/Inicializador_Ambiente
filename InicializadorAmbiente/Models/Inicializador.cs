@@ -15,8 +15,8 @@ public class Inicializador
 
         foreach (var aplicacao in ambiente.Aplicacao)
         {
-            Thread.Sleep(1000);
             site.Executar(aplicacao);
+            Thread.Sleep(TimeSpan.FromSeconds((double)ambiente.IntervaloEmSegundos));
         }
     }
 }

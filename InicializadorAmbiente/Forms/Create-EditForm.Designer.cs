@@ -47,11 +47,13 @@ partial class Create_EditForm
             this.btnSalvar = new System.Windows.Forms.Button();
             this.adcSite = new System.Windows.Forms.Button();
             this.adcPrograma = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numIntervalo)).BeginInit();
             this.flowAplicacoes.SuspendLayout();
             this.template_gbSite.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.siteDataBindingSource)).BeginInit();
             this.template_gbPrograma.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -87,6 +89,11 @@ partial class Create_EditForm
             this.numIntervalo.Name = "numIntervalo";
             this.numIntervalo.Size = new System.Drawing.Size(66, 23);
             this.numIntervalo.TabIndex = 2;
+            this.numIntervalo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // flowAplicacoes
             // 
@@ -95,7 +102,7 @@ partial class Create_EditForm
             this.flowAplicacoes.Controls.Add(this.template_gbPrograma);
             this.flowAplicacoes.Location = new System.Drawing.Point(12, 140);
             this.flowAplicacoes.Name = "flowAplicacoes";
-            this.flowAplicacoes.Size = new System.Drawing.Size(408, 283);
+            this.flowAplicacoes.Size = new System.Drawing.Size(416, 283);
             this.flowAplicacoes.TabIndex = 4;
             // 
             // template_gbSite
@@ -105,7 +112,7 @@ partial class Create_EditForm
             this.template_gbSite.Controls.Add(this.lblURL);
             this.template_gbSite.Location = new System.Drawing.Point(3, 3);
             this.template_gbSite.Name = "template_gbSite";
-            this.template_gbSite.Size = new System.Drawing.Size(373, 72);
+            this.template_gbSite.Size = new System.Drawing.Size(397, 72);
             this.template_gbSite.TabIndex = 0;
             this.template_gbSite.TabStop = false;
             this.template_gbSite.Tag = "";
@@ -148,7 +155,7 @@ partial class Create_EditForm
             this.template_gbPrograma.Controls.Add(this.lblCaminho);
             this.template_gbPrograma.Location = new System.Drawing.Point(3, 81);
             this.template_gbPrograma.Name = "template_gbPrograma";
-            this.template_gbPrograma.Size = new System.Drawing.Size(373, 80);
+            this.template_gbPrograma.Size = new System.Drawing.Size(397, 80);
             this.template_gbPrograma.TabIndex = 0;
             this.template_gbPrograma.TabStop = false;
             this.template_gbPrograma.Tag = "";
@@ -223,11 +230,15 @@ partial class Create_EditForm
             this.adcPrograma.UseVisualStyleBackColor = true;
             this.adcPrograma.Click += new System.EventHandler(this.adcPrograma_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Create_EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 461);
+            this.ClientSize = new System.Drawing.Size(438, 461);
             this.Controls.Add(this.adcPrograma);
             this.Controls.Add(this.adcSite);
             this.Controls.Add(this.btnSalvar);
@@ -245,6 +256,7 @@ partial class Create_EditForm
             ((System.ComponentModel.ISupportInitialize)(this.siteDataBindingSource)).EndInit();
             this.template_gbPrograma.ResumeLayout(false);
             this.template_gbPrograma.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,4 +282,5 @@ partial class Create_EditForm
     private Button adcSite;
     private Button adcPrograma;
     private BindingSource siteDataBindingSource;
+    private ErrorProvider errorProvider1;
 }

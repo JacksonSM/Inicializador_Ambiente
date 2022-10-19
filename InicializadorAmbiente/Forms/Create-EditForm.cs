@@ -34,6 +34,8 @@ public partial class Create_EditForm : Form
 
         var tb = template_tbURL.Clone();
         tb.Name = TB_SITE_URL;
+        tb.Validating += tbURL_Validating;
+        tb.Validated += tbURL_Validated;
         tb.Visible = true;
         tb.Parent = grupBox;
 
@@ -95,18 +97,27 @@ public partial class Create_EditForm : Form
 
     private async void btnSalvar_Click(object sender, EventArgs e)
     {
-        Ambiente ambiente = new Ambiente();
-        ambiente.Nome = tbNomeAmbiente.Text;
-        ambiente.IntervaloEmSegundos = numIntervalo.Value;
+        if(ValidarDados(out string errorMessage))
+        {
+            Ambiente ambiente = new Ambiente();
+            ambiente.Nome = tbNomeAmbiente.Text;
+            ambiente.IntervaloEmSegundos = numIntervalo.Value;
 
-        var dadosSites = CapturarSites();
-        var dadosPrograma = CapturarProgramas();
+            var dadosSites = CapturarSites();
+            var dadosPrograma = CapturarProgramas();
 
-        ambiente.Aplicacao.AddRange(dadosSites);
-        ambiente.Aplicacao.AddRange(dadosPrograma);
+            ambiente.Aplicacao.AddRange(dadosSites);
+            ambiente.Aplicacao.AddRange(dadosPrograma);
 
-        await AmbienteDao.SalvarAmiente(ambiente);
-        this.Close();
+            await AmbienteDao.SalvarAmiente(ambiente);
+
+            this.Close();
+        }
+        else
+        {
+            MessageBox.Show(errorMessage);  
+        }
+        
     }
 
     private List<Aplicacao> CapturarSites()
@@ -138,5 +149,69 @@ public partial class Create_EditForm : Form
             aplicacoes.Add(Aplicacao.CriarPrograma(url));
         }
         return aplicacoes;
+    }
+
+    private void tbURL_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        var text = (sender as TextBox).Text;
+
+        if (!ValidacaoURL.Validar(text, out string errorMessage))
+        {
+            errorProvider1.SetError(sender as Control, errorMessage);
+        }
+    }
+
+    private void tbURL_Validated(object sender, EventArgs e)
+    {
+        var text = (sender as TextBox).Text;
+
+        if (ValidacaoURL.Validar(text, out string errorMessage))
+        {
+            errorProvider1.SetError(sender as Control, errorMessage);
+        }
+    }
+
+    private bool ValidarDados(out string errorMessage)
+    {
+
+        if (string.IsNullOrEmpty(tbNomeAmbiente.Text))
+        {
+            errorMessage = "Nome do ambiente estar vazia !!";
+            return false;
+        }
+
+        //Valida se existe aplicacao. Se for igual a 2 é por que nao tem aplicação.
+        if(flowAplicacoes.Controls.Count == 2)
+        {
+            errorMessage = "Deve ter pelo menos uma aplicação no ambiente.";
+            return false;
+        }
+
+        var sites = flowAplicacoes.Controls
+            .OfType<GroupBox>().Where(x => x.Name == GB_SITE).ToList();
+
+        List<TextBox> urls = new List<TextBox>();
+
+        foreach (var url in sites)
+        {
+            urls.Add(url.Controls.OfType<TextBox>().FirstOrDefault(x => x.Name == TB_SITE_URL));
+        }
+
+        foreach (var tbUrl in urls)
+        {
+            if (string.IsNullOrEmpty(tbUrl.Text))
+            {
+                errorMessage = "Existe campos vazio.";
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(errorProvider1.GetError(tbUrl)))
+            {
+                errorMessage = errorProvider1.GetError(tbUrl);
+                return false;
+            }
+        }
+        errorMessage = "";
+        return true;
     }
 }
