@@ -55,7 +55,7 @@ partial class HomeForm
             this.btn_CriarAmbiente.Name = "btn_CriarAmbiente";
             this.btn_CriarAmbiente.Size = new System.Drawing.Size(99, 20);
             this.btn_CriarAmbiente.Text = "Criar Ambiente";
-            this.btn_CriarAmbiente.Click += new System.EventHandler(this.CriarAmbiente);
+            this.btn_CriarAmbiente.Click += new System.EventHandler(this.CriarAmbiente_Click);
             // 
             // btn_Editar
             // 

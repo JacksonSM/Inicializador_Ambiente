@@ -5,33 +5,15 @@ using InicializadorAmbiente.Models;
 namespace InicializadorAmbiente.Forms;
 public partial class HomeForm : Form
 {
-    public List<Ambiente> Ambiente { get; set; }
     public HomeForm()
     {
         InitializeComponent();   
     }
 
-    private void CriarAmbiente(object sender, EventArgs e)
+    private void HomeForm_Load(object sender, EventArgs e)
     {
-        var form = new Create_EditForm();
-        form.FormClosed += HomeForm_Load;
-        form.Show();
-    }
-
-    private void EditarAmbiente(object sender, EventArgs e)
-    {
-        var ambienteSelecionado = (sender as ToolStripMenuItem).Tag as Ambiente;
-
-        var form = new Create_EditForm(ambienteSelecionado);
-        form.FormClosed += HomeForm_Load;
-        form.Show();
-    }
-
-    private void IniciarAmbiente(object sender, EventArgs e)
-    {
-        var ambiente = (sender as Button).Tag as Ambiente;
-        var inicializador = new Inicializador();
-        inicializador.Iniciar(ambiente);
+        AtualizarInicializadores();
+        PopularMenuEditar();
     }
 
     public void AtualizarInicializadores()
@@ -45,22 +27,6 @@ public partial class HomeForm : Form
 
     }
 
-    private void CriarInicializador(Ambiente ambiente)
-    {
-        var inicializador = btnTemplateInicializador.Clone();
-        inicializador.Text = ambiente.Nome;
-        inicializador.Tag = ambiente;
-
-        inicializador.Click += IniciarAmbiente;
-        inicializador.Visible = true;
-        inicializador.Parent = flpAmbientes;
-    }
-
-    private void HomeForm_Load(object sender, EventArgs e)
-    {
-        AtualizarInicializadores();
-        PopularMenuEditar();
-    }
     private void PopularMenuEditar()
     {
         btn_Editar.DropDownItems.Clear();
@@ -77,10 +43,44 @@ public partial class HomeForm : Form
         {
             var menuItem = new ToolStripMenuItem();
             menuItem.Text = ambiente.Nome;
-            menuItem.Click += EditarAmbiente;
+            menuItem.Click += EditarAmbiente_Click;
             menuItem.Tag = ambiente;
 
             btn_Editar.DropDownItems.Add(menuItem);
         });
+    }
+
+    private void CriarInicializador(Ambiente ambiente)
+    {
+        var inicializador = btnTemplateInicializador.Clone();
+        inicializador.Text = ambiente.Nome;
+        inicializador.Tag = ambiente;
+
+        inicializador.Click += IniciarAmbiente_Click;
+        inicializador.Visible = true;
+        inicializador.Parent = flpAmbientes;
+    }
+
+    private void CriarAmbiente_Click(object sender, EventArgs e)
+    {
+        var form = new BaseCreateEdit();
+        form.FormClosed += HomeForm_Load;
+        form.Show();
+    }
+
+    private void EditarAmbiente_Click(object sender, EventArgs e)
+    {
+        var ambienteSelecionado = (sender as ToolStripMenuItem).Tag as Ambiente;
+
+        var form = new BaseCreateEdit(ambienteSelecionado);
+        form.FormClosed += HomeForm_Load;
+        form.Show();
+    }
+
+    private void IniciarAmbiente_Click(object sender, EventArgs e)
+    {
+        var ambiente = (sender as Button).Tag as Ambiente;
+        var inicializador = new Inicializador();
+        inicializador.Iniciar(ambiente);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace InicializadorAmbiente.Forms;
 
-partial class Create_EditForm
+partial class BaseCreateEdit
 {
     /// <summary>
     /// Required designer variable.
@@ -29,7 +29,7 @@ partial class Create_EditForm
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Create_EditForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseCreateEdit));
             this.label1 = new System.Windows.Forms.Label();
             this.tbNomeAmbiente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -218,7 +218,7 @@ partial class Create_EditForm
             this.adcSite.TabIndex = 3;
             this.adcSite.Text = "+ Site";
             this.adcSite.UseVisualStyleBackColor = true;
-            this.adcSite.Click += new System.EventHandler(this.adcSite_Click);
+            this.adcSite.Click += new System.EventHandler(this.AdicionarBlocoSite_Click);
             // 
             // adcPrograma
             // 
@@ -228,7 +228,7 @@ partial class Create_EditForm
             this.adcPrograma.TabIndex = 4;
             this.adcPrograma.Text = "+ Programa";
             this.adcPrograma.UseVisualStyleBackColor = true;
-            this.adcPrograma.Click += new System.EventHandler(this.adcPrograma_Click);
+            this.adcPrograma.Click += new System.EventHandler(this.AdicionarBlocoPrograma_Click);
             // 
             // errorProvider1
             // 
@@ -244,7 +244,7 @@ partial class Create_EditForm
             this.btnDeletarAmbiente.Text = "Deletar";
             this.btnDeletarAmbiente.UseVisualStyleBackColor = false;
             this.btnDeletarAmbiente.Visible = false;
-            this.btnDeletarAmbiente.Click += new System.EventHandler(this.btnDeletarAmbiente_Click);
+            this.btnDeletarAmbiente.Click += new System.EventHandler(this.DeletarAmbiente);
             // 
             // Create_EditForm
             // 
