@@ -19,16 +19,17 @@ public partial class Create_EditForm : Form
     internal void FormCriarAmbiente()
     {
         btnSalvar.Click += SalvarAmbiente;
+        this.Text = "Criar Ambiente";
     }
 
     internal void FormAtualizarAmbiente(Ambiente ambiente)
     {
         btnSalvar.Click += AtualizarAmbiente;
         IdAmbienteAtualizar = ambiente.Id;
+        this.Text = $"Atualizar: {ambiente.Nome}";
         btnDeletarAmbiente.Visible = true;
         PopularTela(ambiente);
     }
-
 
     private void adcSite_Click(object sender, EventArgs e)
     {
@@ -97,21 +98,16 @@ public partial class Create_EditForm : Form
         }
     }
 
-    private Ambiente CapturarDadosAmbiente()
+    private async void btnDeletarAmbiente_Click(object sender, EventArgs e)
     {
-        Ambiente ambiente = new Ambiente();
-        ambiente.Nome = tbNomeAmbiente.Text;
-        ambiente.IntervaloEmSegundos = numIntervalo.Value;
-
-        var dadosSites = CapturarSites();
-        var dadosPrograma = CapturarProgramas();
-
-        ambiente.Aplicacoes.AddRange(dadosSites);
-        ambiente.Aplicacoes.AddRange(dadosPrograma);
-
-        return ambiente;
+        DialogResult dialogResult = MessageBox
+            .Show("Desejar mesmo deletar o ambiente ?", "!!!!!!!!!", MessageBoxButtons.YesNo);
+        if (dialogResult == DialogResult.Yes)
+        {
+            await AmbienteDao.DeletarAmbiente(IdAmbienteAtualizar);
+            this.Close();
+        }
     }
-
 
     private void PopularTela(Ambiente ambiente)
     {
@@ -129,6 +125,23 @@ public partial class Create_EditForm : Form
                 ClonarGrupoPrograma(aplicacao);
             }
         }
+    }
+
+
+    #region CapturarDados
+    private Ambiente CapturarDadosAmbiente()
+    {
+        Ambiente ambiente = new Ambiente();
+        ambiente.Nome = tbNomeAmbiente.Text;
+        ambiente.IntervaloEmSegundos = numIntervalo.Value;
+
+        var dadosSites = CapturarSites();
+        var dadosPrograma = CapturarProgramas();
+
+        ambiente.Aplicacoes.AddRange(dadosSites);
+        ambiente.Aplicacoes.AddRange(dadosPrograma);
+
+        return ambiente;
     }
 
     private List<Aplicacao> CapturarSites()
@@ -161,6 +174,8 @@ public partial class Create_EditForm : Form
         }
         return aplicacoes;
     }
+
+    #endregion
 
 
     #region Clonagem
@@ -234,9 +249,9 @@ public partial class Create_EditForm : Form
     {
         var text = (sender as TextBox).Text;
 
-        if (!ValidacaoURL.Validar(text, out string errorMessage))
+        if (!Uri.IsWellFormedUriString(text, UriKind.Absolute))
         {
-            errorProvider1.SetError(sender as Control, errorMessage);
+            errorProvider1.SetError(sender as Control, "URL Invalido !!");
         }
     }
 
@@ -244,9 +259,9 @@ public partial class Create_EditForm : Form
     {
         var text = (sender as TextBox).Text;
 
-        if (ValidacaoURL.Validar(text, out string errorMessage))
+        if (Uri.IsWellFormedUriString(text, UriKind.Absolute))
         {
-            errorProvider1.SetError(sender as Control, errorMessage);
+            errorProvider1.SetError(sender as Control, "");
         }
     }
 
@@ -296,15 +311,5 @@ public partial class Create_EditForm : Form
 
     #endregion
 
-    private async void btnDeletarAmbiente_Click(object sender, EventArgs e)
-    {
-        DialogResult dialogResult = MessageBox
-            .Show("Desejar mesmo deletar o ambiente ?", "!!!!!!!!!", MessageBoxButtons.YesNo);
-        if (dialogResult == DialogResult.Yes)
-        {
-            await AmbienteDao.DeletarAmbiente(IdAmbienteAtualizar);
-            this.Close();
-        }
-    }
 }
 

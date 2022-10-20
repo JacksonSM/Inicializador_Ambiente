@@ -29,6 +29,7 @@ partial class Create_EditForm
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Create_EditForm));
             this.label1 = new System.Windows.Forms.Label();
             this.tbNomeAmbiente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -103,7 +104,7 @@ partial class Create_EditForm
             this.flowAplicacoes.Controls.Add(this.template_gbPrograma);
             this.flowAplicacoes.Location = new System.Drawing.Point(12, 140);
             this.flowAplicacoes.Name = "flowAplicacoes";
-            this.flowAplicacoes.Size = new System.Drawing.Size(416, 283);
+            this.flowAplicacoes.Size = new System.Drawing.Size(421, 283);
             this.flowAplicacoes.TabIndex = 4;
             // 
             // template_gbSite
@@ -249,7 +250,7 @@ partial class Create_EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 461);
+            this.ClientSize = new System.Drawing.Size(445, 461);
             this.Controls.Add(this.btnDeletarAmbiente);
             this.Controls.Add(this.adcPrograma);
             this.Controls.Add(this.adcSite);
@@ -259,6 +260,10 @@ partial class Create_EditForm
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbNomeAmbiente);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Create_EditForm";
             this.Text = "Create_EditForm";
             ((System.ComponentModel.ISupportInitialize)(this.numIntervalo)).EndInit();

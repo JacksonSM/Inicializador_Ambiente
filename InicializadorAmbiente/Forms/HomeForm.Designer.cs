@@ -28,6 +28,7 @@ partial class HomeForm
     /// </summary>
     private void InitializeComponent()
     {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btn_CriarAmbiente = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Editar = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,7 @@ partial class HomeForm
             this.flpAmbientes.Controls.Add(this.btnTemplateInicializador);
             this.flpAmbientes.Location = new System.Drawing.Point(12, 27);
             this.flpAmbientes.Name = "flpAmbientes";
-            this.flpAmbientes.Size = new System.Drawing.Size(332, 411);
+            this.flpAmbientes.Size = new System.Drawing.Size(332, 380);
             this.flpAmbientes.TabIndex = 1;
             // 
             // btnTemplateInicializador
@@ -86,12 +87,17 @@ partial class HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(350, 424);
             this.Controls.Add(this.flpAmbientes);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HomeForm";
-            this.Text = "HomeForm";
+            this.Text = "Inicializador";
             this.Load += new System.EventHandler(this.HomeForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
