@@ -14,21 +14,18 @@ public partial class Create_EditForm : Form
     public Create_EditForm()
     {
         InitializeComponent();
-    }
-
-    internal void FormCriarAmbiente()
-    {
         btnSalvar.Click += SalvarAmbiente;
         this.Text = "Criar Ambiente";
     }
-
-    internal void FormAtualizarAmbiente(Ambiente ambiente)
+    public Create_EditForm(Ambiente ambiente)
     {
+        InitializeComponent();
         btnSalvar.Click += AtualizarAmbiente;
         IdAmbienteAtualizar = ambiente.Id;
         this.Text = $"Atualizar: {ambiente.Nome}";
         btnDeletarAmbiente.Visible = true;
         PopularTela(ambiente);
+
     }
 
     private void adcSite_Click(object sender, EventArgs e)
@@ -241,6 +238,7 @@ public partial class Create_EditForm : Form
         }
 
     }
+
     #endregion
 
 
@@ -274,7 +272,7 @@ public partial class Create_EditForm : Form
             return false;
         }
 
-        //Valida se existe aplicacao. Se for igual a 2 é por que nao tem aplicação.
+        //Valida se existe aplicacao. Se for igual a 2 é por que nao tem aplicação. Devido aos componetes que estao para clonagem
         if (flowAplicacoes.Controls.Count == 2)
         {
             errorMessage = "Deve ter pelo menos uma aplicação no ambiente.";
