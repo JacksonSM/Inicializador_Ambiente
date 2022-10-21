@@ -1,7 +1,7 @@
 ﻿using InicializadorAmbiente.Models.Contratcs;
 using System.Threading;
 
-namespace InicializadorAmbiente.Models;
+namespace InicializadorAmbiente.Models.Inicializadores;
 public class Inicializador
 {
     public void Iniciar(Ambiente ambiente)

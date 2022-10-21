@@ -1,14 +1,14 @@
 ﻿using InicializadorAmbiente.Models.Contratcs;
 using System.Diagnostics;
 
-namespace InicializadorAmbiente.Models;
-public class IniciarSite : IAplicacao
+namespace InicializadorAmbiente.Models.Inicializadores;
+public class IniciarPrograma : IAplicacao
 {
-    public IAplicacao Proximo { get ; set; }
+    public IAplicacao Proximo { get; set; }
 
     public void Executar(Aplicacao aplicacao)
     {
-        if (aplicacao.Tipo == "SITE")
+        if (aplicacao.Tipo == "PROGRAMA")
         {
             ProcessStartInfo psInfo = new ProcessStartInfo
             {
