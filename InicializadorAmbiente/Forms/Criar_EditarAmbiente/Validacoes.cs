@@ -38,10 +38,29 @@ public partial class BaseCreateEdit
             return false;
         }
 
+        if (!ValidarCamposURLs(out string errorMessageUrl))
+        {
+            errorMessage = errorMessageUrl;
+            return false;
+        }
+
+        if (!ValidarCamposCaminho(out string errorMessageCaminho))
+        {
+            errorMessage = errorMessageCaminho;
+            return false;
+        }
+
+
+        errorMessage = "";
+        return true;
+    }
+
+    private bool ValidarCamposURLs(out string errorMessage)
+    {
+        List<TextBox> urls = new List<TextBox>();
+
         var sites = flowAplicacoes.Controls
             .OfType<GroupBox>().Where(x => x.Name == GB_SITE).ToList();
-
-        List<TextBox> urls = new List<TextBox>();
 
         foreach (var url in sites)
         {
@@ -59,6 +78,36 @@ public partial class BaseCreateEdit
             if (!string.IsNullOrEmpty(errorProvider1.GetError(tbUrl)))
             {
                 errorMessage = errorProvider1.GetError(tbUrl);
+                return false;
+            }
+        }
+        errorMessage = "";
+        return true;
+    }
+
+    private bool ValidarCamposCaminho(out string errorMessage)
+    {
+        List<TextBox> caminhos = new List<TextBox>();
+
+        var programas = flowAplicacoes.Controls
+            .OfType<GroupBox>().Where(x => x.Name == GB_PROGRAMA).ToList();
+
+        foreach (var url in programas)
+        {
+            caminhos.Add(url.Controls.OfType<TextBox>().FirstOrDefault(x => x.Name == TB_PROGRAMA_CAMINHO));
+        }
+
+        foreach (var tbCaminho in caminhos)
+        {
+            if (string.IsNullOrEmpty(tbCaminho.Text))
+            {
+                errorMessage = "Existe campos vazio.";
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(errorProvider1.GetError(tbCaminho)))
+            {
+                errorMessage = errorProvider1.GetError(tbCaminho);
                 return false;
             }
         }
