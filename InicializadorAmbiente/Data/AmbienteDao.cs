@@ -4,13 +4,14 @@ using Newtonsoft.Json;
 namespace InicializadorAmbiente.Data;
 public class AmbienteDao
 {
-    private static string Caminho = Application.UserAppDataPath;
+    private static readonly string Caminho = Application.UserAppDataPath;
     private const string NOME_AMBIENTE = "config_ambiente.txt";
 
     public static async Task SalvarNovoAmbiente(Ambiente novoAmbiente) 
     {
         var ambientes = ObterAmbientes();
-        novoAmbiente.Id = ambientes.Count + 1;
+        novoAmbiente.Id = GerarId(ambientes.Select(x => x.Id).ToArray());
+   
         ambientes.Add(novoAmbiente);
         await SalvarArquivo(ambientes);
     }
@@ -65,5 +66,20 @@ public class AmbienteDao
         var ambientesSerializado = JsonConvert.SerializeObject(ambientes);
 
         await File.WriteAllTextAsync(arquivo, ambientesSerializado);
+    }
+
+    private static int GerarId(int[] Ids)
+    {
+        var random = new Random();
+        int idNovo;
+
+        do
+            //Gerar um valor aleatório de 0 a 2000, e caso ja tenha um mesmo id, 
+            //vai gerar de novo, até encontrar um id que não exista.
+            idNovo = random.Next(0, 2000);
+
+        while (Ids.Contains(idNovo));
+
+        return idNovo;
     }
 }
